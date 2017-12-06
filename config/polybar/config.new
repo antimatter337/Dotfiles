@@ -1,0 +1,312 @@
+[colors]
+foreground = #CACAC8
+background = #99000000
+
+t1= #6b0102
+t11 = #026b01
+t2 = #ED4800
+t22 = #8a2be2
+t3 = #101010
+t4 = #202020
+t5 = #303030
+t6 = #404040
+t7 = #505050
+t8 = #606060
+t9 = #707070
+t42 = #FFFF00
+t10 = #000000
+t99 = colors.background
+t100 = colors.background
+twarn = #ff4500
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+[bar/top]
+monitor = eDP1
+width = 100%
+height = 15
+offset-x = 0
+offset-y = 0
+fixed-center = true
+
+background = #000000ff
+foreground = ${colors.foreground}
+
+overline-size = 0
+overline-color = #000000ff
+underline-size = 0
+underline-color = #000000ff
+
+spacing = 0
+padding-left = 0
+padding-right = 0
+module-margin-left = 0
+module-margin-right = 0
+
+font-0      = "Fantasque Sans Mono:size=10:dpi=138;2"
+font-1      = "FontAwesome:size=10:dpi=138;2"
+font-2      = "SauceCodePro Nerd Font:size=14;2"
+
+
+modules-left    = pkg arrow2 eth arrow1 arrow7 arrow8
+modules-center    = i3
+modules-right   = arrow6 arrow5 arrow4 memory arrow3 cpu arrow4  battery arrow3 volume arrow4 date
+
+tray-position = center
+tray-padding = 3
+tray-detached = false
+tray-offset-x = 0
+tray-offset-y = 0
+tray-maxsize = 16
+tray-transparent = false
+tray-background = #000000ff
+
+
+###### LEFT ######
+[module/pkg]
+type      = custom/script
+interval    = 5
+format      = <label>
+label     = "%output:0:30%"
+exec      = ~/.config/polybar/pkg.sh
+
+label-background  = ${colors.background}
+label-foreground  = ${colors.foreground}
+label-padding   = 3
+
+
+[module/eth]
+type      = internal/network
+interface   = wlp2s0
+interval    = 3.0
+
+format-connected  = <label-connected>
+format-disconnected = <label-disconnected>
+
+label-connected-padding = 2
+label-disconnected-padding = 2
+
+label-connected   = %{F#000000 +u}  %{F-} %downspeed% %{u- -u}  %{F#000000 +u}  %{F-} %upspeed% %{u- -u}
+label-disconnected  = 
+
+
+label-connected-foreground = ${colors.foreground}
+label-connected-background = ${colors.t5}
+
+label-disconnected-foreground = #FFFF00
+label-disconnected-background = ${colors.t5}
+
+###### CENTER ######
+
+[module/i3]
+type      = internal/i3
+format      = <label-state>
+index-sort    = true
+strip-wsnumbers   = true
+fuzzy-match   = true
+
+label-visible    = %icon%
+label-visible-foreground = #aaaaaa
+label-visible-padding = 1
+label-visible-underline = #FFFFFF
+label-visible-background = #000000ff
+
+label-focused   = 
+label-focused-foreground = #FFFF00
+label-focused-padding = 1
+label-focused-underline = #FFFFFF
+label-focused-background = #000000ff
+
+label-unfocused   = %icon%
+label-unfocused-foreground = ${colors.t5}
+label-unfocused-padding = 1
+label-unfocused-background = #000000ff
+
+label-urgent    = %icon%
+label-urgent-foreground = #FF5F5F
+label-urgent-padding  = 1
+label-urgent-background = #000000ff
+
+ws-icon-0  = 1;
+ws-icon-1  = 2;
+ws-icon-2  = 3;
+ws-icon-3  = 4;
+ws-icon-4  = 5;
+ws-icon-5  = 6;
+ws-icon-6  = 7;
+
+###### RIGHT  ######
+[module/date]
+type      = internal/date
+interval    = 2
+
+date      = "%d.%m.%Y"
+date-alt    = "%A, %d. %B"
+
+time      = "%I:%M %p "
+time-alt    = "%d-%m "
+
+label-background  = ${colors.t5}
+label-foreground = ${colors.foreground}
+label-padding-right =  2
+label-padding-left = 2
+
+label-padding  = 1
+format-padding   = 0
+format = <label>
+label = %time%
+label-font  = 0
+
+
+[module/cpu]
+type = internal/cpu
+format = <label> <ramp-coreload>
+
+label-background  = #000000
+label-foreground  = ${colors.foreground}
+
+interval    = 2
+label     = "  %percentage%% "
+label-font = 0`
+padding = 3
+
+ramp-coreload-0   = ▁
+ramp-coreload-1   = ▂
+ramp-coreload-2   = ▃
+ramp-coreload-3   = ▄
+ramp-coreload-4   = ▅
+ramp-coreload-5   = ▆
+ramp-coreload-6   = ▇
+ramp-coreload-7   = █
+
+ramp-coreload-0-foreground = #00FF00
+ramp-coreload-1-foreground = #3FFF00
+ramp-coreload-2-foreground = #7FFF00
+ramp-coreload-3-foreground = #BFFF00
+ramp-coreload-4-foreground = #FFFF00
+ramp-coreload-5-foreground = #FDBF00
+ramp-coreload-6-foreground = #FC7F00
+ramp-coreload-7-foreground = #FB3F00
+
+ramp-coreload-background = #000000
+
+[module/memory]
+type      = internal/memory
+interval    = 2
+format      = <label><bar-used>
+label     =  %percentage_used%%
+label-background  = ${colors.t5}
+label-padding   = 2
+
+bar-used-indicator  = ●
+bar-used-width    = 8
+bar-used-foreground-0 = #00FF00
+bar-used-foreground-1 = #00FF00
+bar-used-foreground-2 = #00FF00
+bar-used-foreground-3 = #00FF00
+bar-used-fill   = ●
+bar-used-empty    = ●
+bar-used-empty-foreground = #000000
+bar-used-fill-background = ${colors.t5}
+bar-used-empty-background = ${colors.t5}
+
+[module/volume]
+type = custom/script
+exec = sh $HOME/.config/polybar/volume.sh
+interval = 0.1
+click-left = pamixer -t
+click-right = pavucontrol &
+scroll-up = pamixer -i 5
+scroll-down = pamixer -d 5
+label-padding   = 2
+format-foreground = ${colors.t5}
+format-background = ${colors.background}
+
+[module/battery]
+type = internal/battery
+interval = .5
+full-at = 100
+battery = BAT0
+adapter = ACAD
+
+format-charging = <animation-charging> <label-charging>
+format-charging-padding = 2
+format-charging-underline = #8a2be2
+format-charging-foreground = #8a2be2
+
+label-background  = ${colors.background}
+label-padding-right = 2
+label-padding-left = 2
+label-padding   = 1
+format-padding    = 0
+format-discharging = <ramp-capacity> <label-discharging>
+format-discharging-padding = 2
+format-full-underline = #8a2be2
+format-full-padding = 2
+
+label-charging = %{F#b7b8b9}%percentage:2% %%{F-}
+label-discharging = %percentage:2% %
+label-full = %{F#31a354}%{F-} %percentage% % %{F#d7a645}%{F-}
+
+ramp-capacity-0 = %{F#e31a1c u#e31a1c +u} %{F-}
+ramp-capacity-1 = %{F#e31a1c u#e31a1c +u} %{F-}
+ramp-capacity-2 = %{F#d7a645 u#d7a645 +u} %{F-}
+ramp-capacity-3 = %{F#31a354 u#31a354 +u} %{F-}
+ramp-capacity-4 = %{F#31a354 u#31a354 +u} %{F-}
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+###### ARROWS ######
+
+[module/arrow1]
+type = custom/text
+content = " "
+content-foreground = ${colors.t5}
+content-background = #000000
+
+[module/arrow2]
+type = custom/text
+content = " "
+content-foreground = #000000 
+content-background = ${colors.t5}
+
+[module/arrow3]
+type = custom/text
+content = " "
+content-foreground = #000000
+content-background = ${colors.t5}
+
+[module/arrow4]
+type = custom/text
+content = " "
+content-foreground = ${colors.t5}
+content-background = #000000
+
+[module/arrow5]
+type = custom/text
+content = ""
+content-foreground = #FFFF00 
+content-background = #000000
+
+[module/arrow6]
+type = custom/text
+content = ""
+content-foreground = ${colors.t5} 
+content-background = #000000
+
+[module/arrow7]
+type = custom/text
+content = ""
+content-foreground = #FFFF00
+content-background = #000000 
+
+[module/arrow8]
+type = custom/text
+content = ""
+content-foreground = ${colors.t5}
+content-background = #000000

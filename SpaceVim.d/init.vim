@@ -3,11 +3,13 @@ let g:spacevim_enable_debug = 1
 let g:spacevim_realtime_leader_guide = 1
 call SpaceVim#layers#load('incsearch')
 call SpaceVim#layers#load('lang#c')
+call SpaceVim#layers#load('lang#elixir')
 call SpaceVim#layers#load('lang#python')
 call SpaceVim#layers#load('lang#tmux')
 call SpaceVim#layers#load('lang#vim')
 call SpaceVim#layers#load('shell')   
 call SpaceVim#layers#load('tools#screensaver')
+call SpaceVim#layers#load('vim-airline')
 let g:spacevim_enable_vimfiler_welcome = 1
 let g:spacevim_enable_debug = 1
 let g:deoplete#auto_complete_delay = 150
@@ -27,6 +29,18 @@ if has('python3')
 endif
 let g:clang2_placeholder_next = ''
 let g:clang2_placeholder_prev = ''
-let g:spacevim_colorscheme ='adventurous.vim'
-let g:spacevim_colorscheme_bg ='dark'
+let g:spacevim_custom_plugins = [
+\ ['vim-airline/vim-airline'],
+\ ]
 
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:webdevicons_enable = 1
+let g:webdevicons_enable_nerdtree = 1
+let g:webdevicons_enable_airline_tabline = 1
+let g:webdevicons_enable_airline_statusline = 1
+let g:spacevim_filemanager = 'nerdtree'
+let g:spacevim_colorscheme = 'adventurous'
+let g:spacevim_colorscheme_bg = 'dark'
+
+set showcmd

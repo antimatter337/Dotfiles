@@ -31,6 +31,7 @@ let g:clang2_placeholder_next = ''
 let g:clang2_placeholder_prev = ''
 let g:spacevim_custom_plugins = [
 \ ['vim-airline/vim-airline'],
+\ ['ryanoasis/vim-devicons'],
 \ ]
 
 let g:airline#extensions#tabline#enabled = 1
